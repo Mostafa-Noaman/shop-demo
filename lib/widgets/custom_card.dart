@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shop_demo/models/product_model.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({
-    super.key,
-  });
-
+  CustomCard({super.key, required this.products});
+  ProductModel products;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,34 +20,35 @@ class CustomCard extends StatelessWidget {
                   blurRadius: 20),
             ],
           ),
-          child: const Card(
+          child: Card(
             elevation: 10,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    'mobile ',
-                    style: TextStyle(
+                    products.title,
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
                       fontSize: 18,
                       color: Colors.grey,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        r'$750',
-                        style: TextStyle(
+                        r'$ ' '${products.price.toString()}',
+                        style: const TextStyle(
                           fontSize: 18,
                         ),
                       ),
-                      Icon(
+                      const Icon(
                         FontAwesomeIcons.solidHeart,
                         color: Colors.red,
                       ),
@@ -60,11 +60,12 @@ class CustomCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 110,
-          bottom: 55,
+          left: 80,
+          bottom: 80,
           child: Image.network(
-            'https://rukminim2.flixcart.com/image/850/1000/l1zc6fk0/mobile-skin/j/e/w/high-quality-red-matte-screen-protector-skin-or-vinyl-wrap-for-original-imagdf9a88vaxnvb.jpeg?q=90',
+            products.image,
             height: 100,
+            width: 100,
           ),
         ),
       ],
