@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-
 import '../helper/api.dart';
 import '../models/product_model.dart';
 
@@ -11,8 +9,8 @@ class UpdateProduct {
     required String description,
     required String category,
   }) async {
-    final Response response =
-        await Api().post(url: 'https://fakestoreapi.com/products', body: {
+    Map<String, dynamic> data =
+        await Api().put(url: 'https://fakestoreapi.com/products', body: {
       'title': title,
       'price': price,
       'image': image,
@@ -20,6 +18,6 @@ class UpdateProduct {
       'category': category,
     });
 
-    return ProductModel.fromJson(response.data);
+    return ProductModel.fromJson(data);
   }
 }
