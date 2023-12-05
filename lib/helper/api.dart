@@ -33,10 +33,12 @@ class Api {
   }
 
   Future<dynamic> put({required String url, @required dynamic body}) async {
-    http.Response response = await http.post(Uri.parse(url), body: body);
+    print('url = $url body = $body ');
+    http.Response response = await http.put(Uri.parse(url), body: body);
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
+      print(data);
       return data;
     } else {
       throw Exception('there was an error ==> ${response.statusCode}');
